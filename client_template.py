@@ -11,7 +11,6 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",
-
 ]
 
 app.add_middleware(
@@ -27,7 +26,7 @@ class User(BaseModel):
 
 @app.get("/user")
 async def get_user() -> User:
-    return User(name="James")
+    return User(name=None)
 
 if __name__ == '__main__':
     import uvicorn
