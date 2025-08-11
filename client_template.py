@@ -6,6 +6,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+import getpass
 
 app = FastAPI()
 
@@ -21,15 +22,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 class User(BaseModel):
     name: str | None = None
 
-@app.get("/user")
-async def get_user() -> User:
-    return User(name=None)
 
-if __name__ == '__main__':
+@app.get("/api/user")
+async def get_user() -> User:
+    return User(name=getpass.getuser())
+
+
+if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(
         "client:app",
         host="127.0.0.1",
