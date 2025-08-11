@@ -1,2 +1,6 @@
 __pycache__/
-client.py
+self.db
+move
+data/self.db-shm
+data/self.db-wal
+*.sh
