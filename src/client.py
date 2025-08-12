@@ -2,8 +2,6 @@
 # /// script
 # dependencies = ["fastapi", "uvicorn", "sqlmodel"]
 # ///
-import os
-import sys
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -37,6 +35,7 @@ def init_db() -> None:
 
 origins = [
     "http://localhost:3000",
+    "http://127.0.0.1:3000",
     "https://pneumonoultrafinalisekaiquestonlinefantasyoftheeastconiosis3.online"
 ]
 
@@ -46,7 +45,6 @@ origins = [
 async def lifespan(_app: FastAPI):
     init_db()
     yield
-    # cleanup here if needed
 
 
 app = FastAPI(
@@ -83,12 +81,6 @@ async def get_something(session: Session = Depends(get_session)):
 
 if __name__ == "__main__":
     import uvicorn
-    from pathlib import Path
-
-    if not (Path.cwd() / "move").exists():
-        print("‼️ An error has occurred.")
-        print("⚠️ Please run 'touch move'")
-        sys.exit(-1)
 
     uvicorn.run(
         "client:app",
